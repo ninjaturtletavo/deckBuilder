@@ -14,8 +14,8 @@ const App = () => {
   const [deck, setDeck] = useState([]);
 
   const addCardToDeck = ({ id, name }) => {
-    const nextDeck = [...deck]; //making a duplicate
-    const index = nextDeck.findIndex((card) => card.id === id); // finds card matching id's
+    const nextDeck = [...deck]; // make a duplicate first
+    const index = nextDeck.findIndex((card) => card.id === id);
 
     // index will be -1 if it is not found
     if (index > -1) {
@@ -36,7 +36,7 @@ const App = () => {
     const index = nextDeck.findIndex((card) => card.id === id);
 
     if (index === -1) {
-      //does nothing if we're trying to move a card NOT in the deck
+      // don't do anything if we're trying to remove a card not in the deck
       return;
     }
 
@@ -45,7 +45,7 @@ const App = () => {
       nextDeck.splice(index, 1);
     } else {
       // decrement the count
-      nextDeck[index].count - +1;
+      nextDeck[index].count -= 1;
     }
 
     setDeck(nextDeck);
@@ -59,7 +59,11 @@ const App = () => {
         addCardToDeck={addCardToDeck}
         removeCardFromDeck={removeCardFromDeck}
       />
-      <DeckList deck={deck} />
+      <DeckList
+        deck={deck}
+        addCardToDeck={addCardToDeck}
+        removeCardFromDeck={removeCardFromDeck}
+      />
     </div>
   );
 };
